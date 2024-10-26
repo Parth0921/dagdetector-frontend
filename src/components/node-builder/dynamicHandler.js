@@ -8,7 +8,7 @@ export const DynamicHandler = ({ id, input }) => {
     const dynamicHandlers = extractInputHandler(input);
     const updateNodeInternals = useUpdateNodeInternals();
 
-    const updateNode = useCallback(() => updateNodeInternals(id), [id, updateNodeInternals]);
+    const updateNode = useCallback(() => updateNodeInternals(id), [id, dynamicHandlers, updateNodeInternals]);
     useEffect(() => updateNode(), [updateNode])
 
     return (

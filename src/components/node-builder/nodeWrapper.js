@@ -4,7 +4,7 @@
 
 export const NodeWrapper = ({nodeName, children}) => {
     return (
-        <div style={{width: 200, height: 80, border: '1px solid black'}}>
+        <div style={{width: 220, maxHeight: 380, border: '1px solid black', overflow: 'hidden'}}>
             <div>
                 <span>{nodeName}</span>
             </div>

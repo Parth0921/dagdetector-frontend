@@ -5,6 +5,7 @@ import { Handle, Position } from 'reactflow';
 import { NodeWrapper } from '../node-builder/nodeWrapper';
 import { NodeInputText } from '../node-builder/nodeInputText';
 import { DynamicHandler } from '../node-builder/dynamicHandler';
+import { NodeInputTextArea } from '../node-builder/nodeInputTextArea';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
@@ -16,7 +17,8 @@ export const TextNode = ({ id, data }) => {
   return (
     <NodeWrapper nodeName="Text">
       <DynamicHandler id={id} input={currText} />
-      <NodeInputText label="Text:" value={currText} handleChange={handleTextChange} />
+      {/* <NodeInputText label="Text:" value={currText} handleChange={handleTextChange} />*/}
+      <NodeInputTextArea label="Text:" value={currText} handleChange={handleTextChange} />
       <Handle
         type="source"
         position={Position.Right}
