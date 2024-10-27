@@ -48,6 +48,14 @@ export const SubmitButton = () => {
       };
     });
     //handle when nodes and edges are empty
+    if (nodesList.length === 0) {
+      displayErrorToast("Error: No nodes found", theme);
+      return;
+    }
+    if (edgesList.length === 0) {
+      displayErrorToast("Error: No edges found", theme);
+      return;
+    }
 
     const payload = {
       nodes: nodesList,
