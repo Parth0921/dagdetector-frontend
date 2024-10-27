@@ -3,33 +3,35 @@
 import { Handle, Position, useUpdateNodeInternals } from "reactflow";
 import { extractInputHandler } from "../../utils/helper/textNodeHelper";
 import { useCallback, useEffect } from "react";
+import { StyledHandler } from "./stylesHanlder";
 
 export const DynamicHandler = ({ id, input }) => {
-    const dynamicHandlers = extractInputHandler(input);
-    const updateNodeInternals = useUpdateNodeInternals();
+  const dynamicHandlers = extractInputHandler(input);
+  const updateNodeInternals = useUpdateNodeInternals();
 
-    const updateNode = useCallback(() => updateNodeInternals(id), [id, dynamicHandlers, updateNodeInternals]);
-    useEffect(() => updateNode(), [updateNode])
+  const updateNode = useCallback(
+    () => updateNodeInternals(id),
+    [id, dynamicHandlers, updateNodeInternals]
+  );
+  useEffect(() => updateNode(), [updateNode]);
 
-    return (
-        <>
-       {
-            dynamicHandlers.length > 0 &&
-            dynamicHandlers.map((handle, index) => {
-                const len = dynamicHandlers.length;
-                const positionFromTop = ((index+1) * 100 / (len + 1));
-                const handleId = `${id}-input-${index+1}-${handle}`;
-                return (
-                    <Handle
-                        key={handleId}
-                        type='target'
-                        position= {Position.Left}
-                        id={handleId}
-                        style={{ top: `${positionFromTop}%`}}
-                    />
-                )
-            })
-      } 
-        </>
-    )
-}
+  return (
+    <>
+      {dynamicHandlers.length > 0 &&
+        dynamicHandlers.map((handle, index) => {
+          const len = dynamicHandlers.length;
+          const positionFromTop = ((index + 1) * 100) / (len + 1);
+          const handleId = `${id}-input-${index + 1}-${handle}`;
+          return (
+            <StyledHandler
+              key={handleId}
+              type="target"
+              position={Position.Left}
+              id={handleId}
+              style={{ top: `${positionFromTop}%` }}
+            />
+          );
+        })}
+    </>
+  );
+};

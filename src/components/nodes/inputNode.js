@@ -1,11 +1,12 @@
 // inputNode.js
 
 import { useState } from "react";
-import { Handle, Position } from "reactflow";
+import { Position } from "reactflow";
 import { NodeWrapper } from "../node-builder/nodeWrapper";
 import { NodeInputText } from "../node-builder/nodeInputText";
 import { NodeSelectWrapper } from "../node-builder/nodeSelect";
 import { NodeInputFile } from "../node-builder/nodeInputFile";
+import { StyledHandler } from "../node-builder/stylesHanlder";
 
 export const InputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(
@@ -18,8 +19,8 @@ export const InputNode = ({ id, data }) => {
     setCurrName(e.target.value);
   };
 
-  const handleTypeChange = (e) => {
-    setInputType(e.target.value);
+  const handleTypeChange = (option) => {
+    setInputType(option);
   };
 
   const handleFileChange = (e) => {
@@ -28,11 +29,11 @@ export const InputNode = ({ id, data }) => {
 
   const options = ["Text", "File"];
   return (
-    <NodeWrapper nodeName="Input" nodeType={data?.nodeType}>
+    <NodeWrapper nodeName="Input" nodeType={data?.nodeType} id={id}>
       <div>
         {inputType === "Text" && (
           <NodeInputText
-            label="Name:"
+            label="Name"
             value={currName}
             handleChange={handleNameChange}
           />
@@ -47,7 +48,12 @@ export const InputNode = ({ id, data }) => {
           options={options}
         />
       </div>
-      <Handle type="source" position={Position.Right} id={`${id}-value`} />
+      <StyledHandler
+        type="source"
+        position={Position.Right}
+        id={`${id}-value`}
+        className="!bg-white"
+      />
     </NodeWrapper>
   );
 };

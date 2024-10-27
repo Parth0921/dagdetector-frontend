@@ -12,48 +12,37 @@ export const NodeSelectWrapper = ({ label, value, options, handleChange }) => {
   };
   return (
     <div
-      className={`px-2 rounded-lg p-1 relative ${
-        isOpen ? "border border-[#36C2CE]" : "border"
+      className={`px-2 rounded-lg p-1 flex justify-between items-center relative cursor-pointer dark:text-white ${
+        isOpen ? "border border-accent" : "border"
       }`}
+      onClick={toggleOpen}
     >
-      <label className="text-[#7D7D7D]">{label}</label>
-      <div className="">
-        <div
-          onClick={toggleOpen}
-          className="flex justify-between cursor-pointer"
-        >
-          <p> Select Option</p>
-          <IoIosArrowDropdown />
-        </div>
-        {isOpen && (
-          <div className="absolute left-0 top-full translate-y-[2px] w-full text-center z-50 bg-white border-2 rounded-lg">
-            {options.map((option) => (
-              <div
-                key={option}
-                onClick={() => handleChange(option)}
-                className="hover:bg-[#7D7D7D]/10 cursor-pointer py-1"
-              >
-                {" "}
-                {option}{" "}
-              </div>
-            ))}
+      <div>
+        <label className="text-text_secondary">{label}</label>
+        <div className="">
+          <div className="flex justify-between cursor-pointer">
+            <p> {value}</p>
           </div>
-        )}
+          {isOpen && (
+            <div className="absolute left-0 top-full w-full text-center z-50 bg-white border-2 border-black/20 rounded-lg dark:bg-black dark:text-white dark:border-2 dark:border-white/30">
+              {options.map((option) => (
+                <div
+                  key={option}
+                  onClick={() => {
+                    handleChange(option);
+                    toggleOpen();
+                  }}
+                  className="hover:bg-[#7D7D7D]/10 cursor-pointer py-1 dark:hover:bg-[#7D7D7D]/40"
+                >
+                  {" "}
+                  {option}{" "}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
+      <IoIosArrowDropdown />
     </div>
   );
-
-  // not using select
-  // return (
-  //     <div>
-  //         <label>
-  //             {label}
-  //             <select value={value} onChange={handleChange}>
-  //                 { options.map(option => (
-  //                 <option key={option} value={option}>{option}</option>
-  //                 ))}
-  //             </select>
-  //         </label>
-  //     </div>
-  // )
 };

@@ -1,9 +1,43 @@
 // submit.js
 
 import { useStore } from "./store";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useThemeStore } from "./storeTheme";
+
+const displaySuccessToast = (message, theme) => {
+  return toast.success(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    toastId: "backend-response",
+    theme: theme,
+    style: {
+      whiteSpace: "pre-line",
+    },
+  });
+};
+
+const displayErrorToast = (message, theme) => {
+  return toast.error(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    toastId: "backend-response",
+    theme: theme,
+    style: {
+      whiteSpace: "pre-line",
+    },
+  });
+};
 
 export const SubmitButton = () => {
   const { nodes, edges } = useStore();
+  const { theme } = useThemeStore();
   const handleClick = async (e) => {
     e.preventDefault();
     const nodesList = nodes.map((node) => node.id);
@@ -30,27 +64,36 @@ export const SubmitButton = () => {
       });
       const data = await response.json();
       console.log(data);
+      const { num_nodes, num_edges, is_dag_bfs, is_dag_dfs } = data;
+
+      if (is_dag_bfs !== "" || is_dag_dfs !== "") {
+        displayErrorToast(
+          `Error: Graph is not a DAG. Please check node ${is_dag_bfs} or node ${is_dag_dfs}`,
+          theme
+        );
+        return;
+      }
+      const displayMessage = `
+      Total nodes: ${num_nodes}
+      Total edges: ${num_edges}
+      Graph is a DAG
+      `;
+      displaySuccessToast(displayMessage, theme);
     } catch (e) {
       console.log(e);
     }
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <button className="bg-gradient-to-r from-[#3A86FF] to-[#00F5D4] text-white font-semibold rounded p-1">
-        <span className="flex w-full bg-[#F4F4F9] text-[#333333] rounded p-2">
-          Gradient border
-        </span>
-        <p className="text-[#7D7D7D]">Subtitle text</p>
-      </button>
-
+    <div className="mt-8 flex items-center justify-center text-xl">
       <button
-        className="border-2 border-blue-400 p-2 rounded-full hover:bg-green-300"
+        className="shadow-lg px-6 py-2 md:px-12 md:py-4 rounded-full hover:bg-black/50 hover:scale-110 active:scale-105 transition-all bg-black/30 text-white dark:bg-white/40 dark:text-black dark:hover:bg-white/60 dark:hover:text-white dark:active:bg-white/60 dark:active:text-white"
         type="submit"
         onClick={handleClick}
       >
         Submit
       </button>
+      <ToastContainer />
     </div>
   );
 };
