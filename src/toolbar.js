@@ -6,8 +6,8 @@ import { nodes } from './utils/constants/nodesList';
 export const PipelineToolbar = () => {
 
     return (
-        <div style={{ padding: '10px' }}>
-            <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+        <div className='p-[10px]'>
+            <div className='mt-6 flex flex-wrap gap-2'>
                 {
                     // Cleaner and extensible way to render draggable nodes
                     nodes.map((node) => (

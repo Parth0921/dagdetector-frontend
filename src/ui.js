@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 import { useState, useRef, useCallback } from 'react';
-import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
+import ReactFlow, { Controls, Background, MiniMap, BackgroundVariant } from 'reactflow';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 import 'reactflow/dist/style.css';
@@ -82,7 +82,7 @@ export const PipelineUI = () => {
 
     return (
         <>
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh'}}>
+        <div ref={reactFlowWrapper} className='w-full h-[70vh]'>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -97,7 +97,7 @@ export const PipelineUI = () => {
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='smoothstep'
             >
-                <Background color="#aaa" gap={gridSize} />
+                <Background color="#d2d2d9" variant={BackgroundVariant.Dots} gap={gridSize} size={2} />
                 <Controls />
                 <MiniMap />
             </ReactFlow>

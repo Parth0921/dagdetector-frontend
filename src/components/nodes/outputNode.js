@@ -24,14 +24,14 @@ export const OutputNode = ({ id, data }) => {
   ]
 
   return (
-    <NodeWrapper nodeName="Output">
+    <NodeWrapper nodeName="Output" nodeType={data?.nodeType}>
       <Handle
         type="target"
         position={Position.Left}
         id={`${id}-value`}
       />
       <div>
-        <NodeInputText label="Name:" value={currName} handleChange={handleNameChange} />
+        <NodeInputText label="Name" value={currName} handleChange={handleNameChange} />
         <NodeSelectWrapper label="Type:" value={outputType} handleChange={handleTypeChange} options={options} />
       </div>
     </NodeWrapper>

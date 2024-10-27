@@ -5,7 +5,7 @@ import { NodeWrapper } from '../node-builder/nodeWrapper';
 
 export const LLMNode = ({ id, data }) => {
   return (
-    <NodeWrapper nodeName="LLM">
+    <NodeWrapper nodeName="LLM" nodeType={data?.nodeType}>
       <Handle
         type="target"
         position={Position.Left}

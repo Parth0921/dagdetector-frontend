@@ -26,7 +26,7 @@ export const DraggableNode = ({ type, label }) => {
         }} 
         draggable
       >
-          <span style={{ color: '#fff' }}>{label}</span>
+          <span className="bg-white px-2">{label}</span>
       </div>
     );
   };
