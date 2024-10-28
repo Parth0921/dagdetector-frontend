@@ -28,7 +28,7 @@ This consists of 3 main folders
 3. ui - Consists of components that are on the homepage.
 
 **2. Store**
-1. NodeStore - Zustand store for handling logic for nodes on the canvas. I added an extra functionality for the nodes to be deleted.
+1. NodeStore - Zustand store for handling logic for nodes on the canvas. I added an extra functionality for the nodes to be deleted and also for an edge to be deleted if we have source handle.
 
 2. ThemeStore - Zustand store which manages theme for the user. It stores the theme in local storage to remember user's preference. If no local theme inside local storage it uses user's system theme as default!
 
@@ -37,18 +37,37 @@ Utility functions that are used in multiple files
 
 1. Constants
     1. NodeList - A central place to manage nodes. The nodes array is used for the ui to render the toolbar, then also for reactflow component to let it know what type of nodes are present in the application. To add/delete a node simply add a new entry to the list and it will get updated everywhere!
+
 2. Helper
     1. nodeHelper - A general helper function for all nodes
     2. NodeMapperUI - Builds node and their type object required for Reactflow based on the nodes list constant.
-    3. TextNodeHelper - Helper function for specifically text node since they contain the dynamic nature of javascript. Contains a regex pattern which is matched and returns an array of string which are mapped over to display handler in Text Node.
+
 3. Hooks
-    1. useFocus - Abstracted implementation to know which input/textarea is active and apply styles for user visibility. Pass ref as the parameter and it manages event handlers under the hood. Also has a cleanup function to remove event handlers when the component gets unmounted from the DOM.
+    1. useFocus - Abstracted implementation to know which input/textarea is active and apply styles for user visibility. Pass the reference of input/textarea as the parameter and it manages event handlers under the hood. Also has a cleanup function to remove event handlers when the component gets unmounted from the DOM.
 
 ---
 
 ## Explanation of my implementation for different parts
 
 ### Part 1: Node Abstraction
+My approach to solving this was thinking of nodes which have their own logic which they can pass to a component and it handles the rest. The logic is unique to the node but resuable component which are shared by every node. I thought of node-builder as building blocks for the node hence the name node-builder.
+
+**Steps to add a new Node**
+1. Create builder for the node if it doesn't exists inside node-builder.
+2. Create a Node along with it's own logic and state to use the node-builder blocks to achieve desired configuration.
+3. Add the newly created node to NodesList constant inside utils/constants/
+
+Woohoo in just 3 steps a new node can be made!
+Following this approach I have made 5 extra Nodes as per the Part 1 of the problem statement.
+1. Note Node - This is not a part of pipeline but serves a purpose for documentation.
+
+2. File Save Node  - Provides options to the user to save intermediate/output locally on their machine in image or text format.
+
+3. Condition Node - Used when the user might want to branch out the logic and implement if --> then into their pipeline. User can pick if they had like to branch out or do nothing based on the condition.
+
+4. API Node - Helps the user when they might want to make external api calls and use the response data in their pipeline. Node provides option to also make POST request upon which input textarea for body appears.
+
+5. Data Transformation Node - Helps the user perform transformations on data. User can pick from image, pdf, csv, txt, and JSON.
 
 ### Part 2: Styling
 I have picked a theme which resonates with a futuristic vibe for building Pipelines that I feel suits well with VectorShift. The application is available in 2 themes: *Light* and *Dark* this allows the user to work with their preferred theme. I have extended tailwinds colors with accent, primary, and text_secondary.
@@ -59,7 +78,7 @@ Light Theme
 ![Light](./screenshots/light.png)
 
 Dark Theme
-![Dark](./screenshots/Dark.png)
+![Dark](./screenshots/dark.png)
 
 
 ### Part 3: Text Node Logic

@@ -3,7 +3,6 @@ import { LLMNode } from "../../components/nodes/llm";
 import { TextNode } from "../../components/nodes/text";
 import { OutputNode } from "../../components/nodes/output";
 import { LuFileText, LuFileInput, LuFileOutput, LuSave } from "react-icons/lu";
-import { RiOpenaiFill } from "react-icons/ri";
 import { NoteNode } from "../../components/nodes/note";
 import { MdOutlineComment } from "react-icons/md";
 import { FileSaveNode } from "../../components/nodes/fileSave";
