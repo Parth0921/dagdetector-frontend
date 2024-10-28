@@ -3,6 +3,7 @@
 import { Position } from "reactflow";
 import { NodeWrapper } from "../node-builder/nodeWrapper";
 import { StyledHandler } from "../node-builder/stylesHanlder";
+import { getPositionFromTop } from "../../utils/helper/nodeHelper";
 
 export const LLMNode = ({ id, data }) => {
   return (
@@ -11,14 +12,16 @@ export const LLMNode = ({ id, data }) => {
         type="target"
         position={Position.Left}
         id={`${id}-system`}
-        style={{ top: `${100 / 3}%` }}
+        label="System"
+        positionFromTop={`${getPositionFromTop(100/3)}`}
       />
 
       <StyledHandler
         type="target"
         position={Position.Left}
         id={`${id}-prompt`}
-        style={{ top: `${200 / 3}%` }}
+        label="Prompt"
+        positionFromTop={`${getPositionFromTop(200/3)}`}
       />
       <div>
         <span>This is a LLM.</span>
@@ -27,6 +30,7 @@ export const LLMNode = ({ id, data }) => {
         type="source"
         position={Position.Right}
         id={`${id}-response`}
+        label="Response"
       />
     </NodeWrapper>
   );

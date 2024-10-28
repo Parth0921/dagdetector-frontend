@@ -1,9 +1,10 @@
 // Takes id of the node and input to create dynamic handlers for the node and is memoized to avoid unnecessary re-renders.
 
-import { Handle, Position, useUpdateNodeInternals } from "reactflow";
+import { Position, useUpdateNodeInternals } from "reactflow";
 import { extractInputHandler } from "../../utils/helper/textNodeHelper";
 import { useCallback, useEffect } from "react";
 import { StyledHandler } from "./stylesHanlder";
+import { getPositionFromTop } from "../../utils/helper/nodeHelper";
 
 export const DynamicHandler = ({ id, input }) => {
   const dynamicHandlers = extractInputHandler(input);
@@ -20,7 +21,7 @@ export const DynamicHandler = ({ id, input }) => {
       {dynamicHandlers.length > 0 &&
         dynamicHandlers.map((handle, index) => {
           const len = dynamicHandlers.length;
-          const positionFromTop = ((index + 1) * 100) / (len + 1);
+          const positionFromTop = getPositionFromTop(((index+1)*100)/ (len + 1))
           const handleId = `${id}-input-${index + 1}-${handle}`;
           return (
             <StyledHandler
@@ -28,7 +29,8 @@ export const DynamicHandler = ({ id, input }) => {
               type="target"
               position={Position.Left}
               id={handleId}
-              style={{ top: `${positionFromTop}%` }}
+              label={handle}
+              positionFromTop={positionFromTop}
             />
           );
         })}

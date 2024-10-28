@@ -9,11 +9,11 @@ import ReactFlow, {
   MiniMap,
   BackgroundVariant,
 } from "reactflow";
-import { useStore } from "./store";
+import { useNodeStore } from "../../store/nodeStore";
 import { shallow } from "zustand/shallow";
 import "reactflow/dist/style.css";
-import { buildNodeTypes } from "./utils/helper/nodeMapperUi";
-import { useThemeStore } from "./storeTheme";
+import { buildNodeTypes } from "../../utils/helper/nodeMapperUi";
+import { useThemeStore } from "../../store/themeStore";
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
@@ -41,8 +41,7 @@ export const PipelineUI = () => {
     onNodesChange,
     onEdgesChange,
     onConnect,
-    deleteNode,
-  } = useStore(selector, shallow);
+  } = useNodeStore(selector, shallow);
   const { theme } = useThemeStore();
 
   const getInitNodeData = (nodeID, type) => {

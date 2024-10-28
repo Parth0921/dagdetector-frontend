@@ -53,6 +53,7 @@ export const InputNode = ({ id, data }) => {
         position={Position.Right}
         id={`${id}-value`}
         className="!bg-white"
+        label={currName}
       />
     </NodeWrapper>
   );

@@ -2,8 +2,8 @@
 
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { DraggableNode } from "./draggableNode";
-import { useThemeStore } from "./storeTheme";
-import { nodes } from "./utils/constants/nodesList";
+import { useThemeStore } from "../../store/themeStore";
+import { nodes } from "../../utils/constants/nodesList";
 
 export const PipelineToolbar = () => {
   const { theme, toggleTheme } = useThemeStore();

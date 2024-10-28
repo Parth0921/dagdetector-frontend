@@ -25,6 +25,7 @@ export const TextNode = ({ id, data }) => {
         type="source"
         position={Position.Right}
         id={`${id}-output`}
+        label="Output"
       />
     </NodeWrapper>
   );

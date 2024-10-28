@@ -1,9 +1,9 @@
 // submit.js
 
-import { useStore } from "./store";
+import { useNodeStore } from "../../store/nodeStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useThemeStore } from "./storeTheme";
+import { useThemeStore } from "../../store/themeStore";
 
 const displaySuccessToast = (message, theme) => {
   return toast.success(message, {
@@ -36,7 +36,7 @@ const displayErrorToast = (message, theme) => {
 };
 
 export const SubmitButton = () => {
-  const { nodes, edges } = useStore();
+  const { nodes, edges } = useNodeStore();
   const { theme } = useThemeStore();
   const handleClick = async (e) => {
     e.preventDefault();
@@ -72,11 +72,11 @@ export const SubmitButton = () => {
       });
       const data = await response.json();
       console.log(data);
-      const { num_nodes, num_edges, is_dag_bfs, is_dag_dfs } = data;
+      const { num_nodes, num_edges, is_dag } = data;
 
-      if (is_dag_bfs !== "" || is_dag_dfs !== "") {
+      if (is_dag !== "") {
         displayErrorToast(
-          `Error: Graph is not a DAG. Please check node ${is_dag_bfs} or node ${is_dag_dfs}`,
+          `Error: Graph is not a DAG. Please check node ${is_dag}`,
           theme
         );
         return;
