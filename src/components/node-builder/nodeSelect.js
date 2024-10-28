@@ -12,8 +12,8 @@ export const NodeSelectWrapper = ({ label, value, options, handleChange }) => {
   };
   return (
     <div
-      className={`px-2 rounded-lg p-1 flex justify-between items-center relative cursor-pointer dark:text-white ${
-        isOpen ? "border border-accent" : "border"
+      className={`px-2 my-2 rounded-lg p-1 flex justify-between items-center relative cursor-pointer border-2 dark:text-white ${
+        isOpen ? "border-accent" : ""
       }`}
       onClick={toggleOpen}
     >

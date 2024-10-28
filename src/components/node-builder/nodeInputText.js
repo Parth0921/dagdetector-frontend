@@ -11,7 +11,9 @@ export const NodeInputText = ({ label, value, handleChange }) => {
 
   return (
     <div
-      className={`my-2 p-1 rounded-xl border ${focused ? "border-accent" : ""}`}
+      className={`my-2 p-1 rounded-xl border-2 ${
+        focused ? "border-accent" : ""
+      }`}
     >
       <NodeLabel label={label} />
       <input
@@ -20,7 +22,7 @@ export const NodeInputText = ({ label, value, handleChange }) => {
         value={value}
         onChange={handleChange}
         ref={inputRef}
-        className="w-full rounded-lg focus:outline-none dark:bg-black dark:text-white"
+        className="px-2 w-full rounded-lg focus:outline-none dark:bg-black dark:text-white"
       />
     </div>
   );

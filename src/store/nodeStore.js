@@ -59,13 +59,19 @@ export const useNodeStore = create((set, get) => ({
       }),
     });
   },
-  // need to test
+
   deleteNode: (nodeId) => {
     set({
       nodes: get().nodes.filter((node) => node.id !== nodeId),
       edges: get().edges.filter(
         (edge) => edge.source !== nodeId && edge.target !== nodeId
       ),
+    });
+  },
+
+  deleteEdgeFromSourceHandle: (sourceHandle) => {
+    set({
+      edges: get().edges.filter((edge) => edge.sourceHandle !== sourceHandle),
     });
   },
 

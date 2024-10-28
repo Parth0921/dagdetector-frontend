@@ -74,11 +74,8 @@ export const SubmitButton = () => {
       console.log(data);
       const { num_nodes, num_edges, is_dag } = data;
 
-      if (is_dag !== "") {
-        displayErrorToast(
-          `Error: Graph is not a DAG. Please check node ${is_dag}`,
-          theme
-        );
+      if (is_dag === false) {
+        displayErrorToast(`Error: Graph is not a DAG.`, theme);
         return;
       }
       const displayMessage = `
